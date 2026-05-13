@@ -1,65 +1,58 @@
-import Image from "next/image";
+import Link from "next/link";
+import { product } from "@/data/products";
+import ProductCard from "@/components/tienda/ProductCard";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+  const featured = product.slice(0, 3);
+
+  return(
+    <>
+    {/* Hero */}
+      <section className="bg-charcoal text-cream py-24 px-6 text-center">
+        <p className="text-gold text-sm tracking-widest uppercase mb-3">Hecho a mano con amor </p>
+        <h1 className="fonr-display text-5x1 md:text-6x1 mb-6 leading-tight">
+          Muñequitos tejidos <br />
+          <span className="text-blush">Unicos para ti</span>
+        </h1>
+        <p className="text-cream/70 max-w-lg mx-auto mb-10 text-lg">
+        Cada pieza es tejida a mano con materiales de alta calidad.
+        Personaliza el tuyo o elige uno de estos diseños.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/catalogo" className="bg-gold text-charcoal font-semibold px-8 py-3 rounded-full hover:bg-blush transition-colors duration-300">
+          Ver catalogo
+          </Link>
+          <Link href="/pedidio-personalizado" className="border border-cream text-cream px-8 oy-3 rounded-full hover:border-gold hover:text-gold transition-colors duration-300">
+          Pedir personalizado
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Destacados */}
+      <section className="max-w-6x1 mx-auto px-6 py-16">
+        <h2 className="font-display text-3x1 text-center mb-2">Favoritos de la tienda</h2>
+        <p className="text-center text-charcoal/60 mb-10">Los mas queridos por nuestros clientes</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {featured.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
-      </main>
-    </div>
+        <div className="text-center mt-10">
+          <Link href="/catalogo" className="inline-block border-2 border-charcoal text-charcoal px-8 py-3 rounded-full font-demibold hover:bg-charcoal hover:text-cream transition-colors curation-300">
+          Ver todos
+          </Link>
+        </div>
+      </section>
+
+      {/* Banner personalizado */}
+      <section className="bg-mocha text-cream py-16 px6 text-center">
+        <h2 className="font-display text-3x1 mb-4">¿Quieres uno personalizado'</h2>
+        <p className="text-cream/70 max-w-md mx-auto mb-8">
+          Elije colores, tamaño y diseño. Creamos el muñequiito de tus sueños.
+        </p>
+        <Link href="/pedido-personalizado" 
+        className="bg-blush text-charcola font-semibold px-8 py-3 rounded-full hover:bg-lavender transition-colors duration-300">
+          Hacer mi pedido
+        </Link>
+      </section>
+    </>
   );
 }
